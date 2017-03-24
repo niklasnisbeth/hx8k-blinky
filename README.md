@@ -11,11 +11,11 @@ You need the following tools:
 
 There are four files here:
 
-* blink.v
+# blink.v
 
 The actual Verilog code, a simple top-level module with a clock input and output to drive one of the on-board LEDs.
 
-* blink.pcf
+# blink.pcf
 
 This is a "constraints file" which maps wires in the top level to physical pins/pads on the FPGA. This is the part that is different compared to the iCEStick examples. The PCF file uses the names of the physical pads, so you can get them from the datasheet, or more conveniently the schematic for the board you're using, since this will also show where they're connected. 
 
@@ -23,13 +23,13 @@ The names are different on the BGA-packaged 8K compared to the LQFP-packaged 1K,
 
 If you want to use more LEDs or pins on the expansion headers, you'll need to name them in this file. The syntax should be self-explanatory.
 
-* build.yosys
+# build.yosys
 
 This is just a file that contains the two Yosys commands required to turn the verilog into a netlist, which can then be placed-and-routed by Arachne.
 
 This is separate from the makefile to be more flexible, but the commands could easily be added inline to the makefile that actually calls the yosys command.
 
-* Makefile
+# Makefile
 
 A makefile that runs the three commands necessary to build a file that can be use to configure the FPGA. First the Verilog is converted to a netlist using Yosys; then Arachne is use to place-and-route the design for the specific FPGA (the HX8K0); then the configuration file is converted to a bitstream, which can be used to programme the FPGA using the tool iceprog. For your convenience, targets to flash and clean build artifacts are also provided.
 
